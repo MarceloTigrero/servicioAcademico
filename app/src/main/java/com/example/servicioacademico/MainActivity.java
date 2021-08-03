@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     EditText matricula,nombre,apellido,facultad,correo;
     Button inreso;
+    String ma,no,ap,fa,co;
 
     static String Marcelo = "192.168.100.68";
     static String Marco = "192.168.100.4";
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private static final String URL1 = "http://" + Diego + "/Trash/registro.php";
+    private static final String URL1 = "http://192.168.100.68/Trash/registro.php";
 
 
 
@@ -56,14 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 String apell = apellido.getText().toString().trim();
                 String facul = facultad.getText().toString().trim();
                 String corr = correo.getText().toString().trim();
+                ma=matri;
+                no=nom;
+                ap=apell;
+                fa=facul;
+                co=corr;
+                Toast.makeText(MainActivity.this, ""+matri+"    "+nom+"   "+apell+"    "+facul+"   "+corr, Toast.LENGTH_SHORT).show();
                 createUsuario(matri,nom,apell,facul,corr);
 
             }
         });
     }
 
-    private void createUsuario(final String matricula, final String nombre, final String apellido, final String facultad, final String correo) {
-
+    private void createUsuario(final String ma, final String no, final String ap, final String fa, final String co) {
+        Toast.makeText(MainActivity.this, "" + ma, Toast.LENGTH_LONG).show();
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL1,
@@ -79,16 +86,17 @@ public class MainActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(MainActivity.this, "No Registrado" + error, Toast.LENGTH_LONG).show();
                     }
+
                 }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("matricula", matricula);
-                params.put("Nombre", nombre);
-                params.put("Apellido", apellido);
-                params.put("Facultad", facultad);
-                params.put("correo", correo);
+                params.put("matricula",ma);
+                params.put("Nombre", no);
+                params.put("Apellido", ap);
+                params.put("Facultad", fa);
+                params.put("correo", co);
                 return params;
 
             }
