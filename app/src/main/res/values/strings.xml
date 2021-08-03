@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">servicioAcademico</string>
+    <string name="Titulo">Registro de usuario</string>
+    <string name="name">Nombre</string>
+    <string name="lastname">Apellido</string>
+    <string name="matricula">Matricula</string>
+    <string name="correo">Correo</string>
+    <string name="facultad">Facultad</string>
+    <string name="correoex">example@example.com</string>
+    <string name="Ingreso">INGRESO</string>
+
 </resources>
