@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     EditText matricula,nombre,apellido,facultad,correo;
     Button inreso;
-    String ma,no,ap,fa,co;
 
     static String Marcelo = "192.168.100.68";
     static String Marco = "192.168.100.4";
@@ -32,8 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-    private static final String URL1 = "http://192.168.100.68/Trash/registro.php";
+    private static final String URL1 = "http://" + Diego + "/Trash/registro.php";
 
 
 
@@ -41,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        requestQueue = Volley.newRequestQueue(this);
 
         matricula =(EditText) findViewById(R.id.matriculatext);
         nombre =(EditText) findViewById(R.id.nombretext);
@@ -57,20 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 String apell = apellido.getText().toString().trim();
                 String facul = facultad.getText().toString().trim();
                 String corr = correo.getText().toString().trim();
-                ma=matri;
-                no=nom;
-                ap=apell;
-                fa=facul;
-                co=corr;
-                Toast.makeText(MainActivity.this, ""+matri+"    "+nom+"   "+apell+"    "+facul+"   "+corr, Toast.LENGTH_SHORT).show();
                 createUsuario(matri,nom,apell,facul,corr);
 
             }
         });
     }
 
-    private void createUsuario(final String ma, final String no, final String ap, final String fa, final String co) {
-        Toast.makeText(MainActivity.this, "" + ma, Toast.LENGTH_LONG).show();
+    private void createUsuario(final String nomb, final String apell, final String usu, final String con, final String tip) {
+
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL1,
@@ -78,25 +73,23 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         Toast.makeText(MainActivity.this, "Registrado", Toast.LENGTH_SHORT).show();
-
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MainActivity.this, "No Registrado" + error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, ""+error, Toast.LENGTH_SHORT).show();
                     }
-
                 }
         ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("matricula",ma);
-                params.put("Nombre", no);
-                params.put("Apellido", ap);
-                params.put("Facultad", fa);
-                params.put("correo", co);
+                params.put("matricula", nomb);
+                params.put("Nombre", apell);
+                params.put("Apellido", usu);
+                params.put("Facultad", con);
+                params.put("correo", tip);
                 return params;
 
             }
