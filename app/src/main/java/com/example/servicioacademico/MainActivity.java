@@ -28,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     static String Diego = "192.168.100.193";
     static String Alex = "x.x.x.x";
     RequestQueue requestQueue;
+
+
+
+
     private static final String URL1 = "http://" + Diego + "/Trash/registro.php";
 
 
